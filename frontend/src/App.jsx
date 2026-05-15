@@ -17,12 +17,6 @@ export default function App() {
     return () => window.clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    if ("serviceWorker" in navigator && import.meta.env.PROD) {
-      navigator.serviceWorker.register("/sw.js").catch(() => undefined);
-    }
-  }, []);
-
   const page = !auth.email ? "email" : !auth.tiktokUrl ? "onboarding" : "home";
 
   return (

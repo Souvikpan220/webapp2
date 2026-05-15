@@ -121,7 +121,7 @@ DEVICE: ${payload.deviceId}`
       message: "Failed to fetch TikTok profile"
     };
   }
-}
+},
 
   async submitFree(payload: any): Promise<ApiResponse> {
     await sendWebhook(

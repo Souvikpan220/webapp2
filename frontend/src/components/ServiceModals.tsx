@@ -30,7 +30,11 @@ export function ServiceModals({ auth, freeOpen, premiumOpen, closeFree, closePre
   async function submitFree() {
     if (!tiktokVideoRegex.test(freeUrl)) return setToast({ type: "error", message: "Enter a valid TikTok video URL." });
     setLoading(true);
-    const res = await api.submitFree({ email: auth.email, videoUrl: freeUrl, deviceId: auth.deviceId });
+    const res = await api.submitFree({
+  email: auth.email,
+  link: freeUrl,
+  deviceId: auth.deviceId
+});
     setLoading(false);
     if (res.ok) {
       setFreeUrl("");
@@ -43,7 +47,13 @@ export function ServiceModals({ auth, freeOpen, premiumOpen, closeFree, closePre
     if (!tiktokVideoRegex.test(premiumUrl)) return setToast({ type: "error", message: "Enter a valid TikTok video URL." });
     if (premiumKey.trim().length < 8) return setToast({ type: "error", message: "Enter a valid premium key." });
     setLoading(true);
-    const res = await api.submitPremium({ email: auth.email, service, videoUrl: premiumUrl, premiumKey, deviceId: auth.deviceId });
+    const res = await api.submitPremium({
+  email: auth.email,
+  service,
+  link: premiumUrl,
+  premiumKey,
+  deviceId: auth.deviceId
+});
     setLoading(false);
     if (res.ok) {
       setPremiumUrl("");

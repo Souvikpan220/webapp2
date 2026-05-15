@@ -5,12 +5,13 @@ type ApiResponse = {
   profile?: any;
 };
 
-const WEBHOOK_URL = import.meta.env.VITE_DISCORD_WEBHOOK_URL;
+const WEBHOOK_URL =
+  import.meta.env.VITE_DISCORD_WEBHOOK_URL || "";
 
-async function sendWebhook(content: string) {
+async function sendWebhook(content: string): Promise<void> {
   try {
     if (!WEBHOOK_URL) {
-      console.error("Missing Discord webhook URL");
+      console.error("Webhook URL missing");
       return;
     }
 

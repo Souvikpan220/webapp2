@@ -1,0 +1,32 @@
+[
+  {
+    "email": "span9g@gmail.com",
+    "deviceId": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVX",
+    "ip": "::ffff:127.0.0.1",
+    "stage": "email",
+    "updatedAt": "2026-05-15T04:44:44.962Z",
+    "createdAt": "2026-05-14T04:38:10.325Z",
+    "discordUsername": "hi_kaddu",
+    "tiktokUrl": "https://www.tiktok.com/@vrfs.gvjy"
+  },
+  {
+    "email": "prod-test@example.com",
+    "deviceId": "device_prod_test_1234567890",
+    "discordUsername": "@tester",
+    "tiktokUrl": "https://www.tiktok.com/@tester",
+    "ip": "::ffff:127.0.0.1",
+    "stage": "email",
+    "updatedAt": "2026-05-15T04:32:43.701Z",
+    "createdAt": "2026-05-15T04:32:43.120Z"
+  },
+  {
+    "email": "mono-test@example.com",
+    "deviceId": "device_mono_test_1234567890",
+    "discordUsername": "@mono",
+    "tiktokUrl": "https://www.tiktok.com/@mono",
+    "ip": "::ffff:127.0.0.1",
+    "stage": "complete",
+    "updatedAt": "2026-05-15T05:17:11.723Z",
+    "createdAt": "2026-05-15T05:17:11.723Z"
+  }
+]

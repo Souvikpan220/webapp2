@@ -1,0 +1,18 @@
+{
+  "name": "Kaddu Boost",
+  "short_name": "Kaddu",
+  "description": "Premium mobile TikTok services dashboard.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070711",
+  "theme_color": "#080812",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/pwa-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

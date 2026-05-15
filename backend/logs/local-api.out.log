@@ -1,0 +1,15 @@
+Kaddu API running on http://127.0.0.1:8080
+[storage] data directory C:\Users\SOUVIK\OneDrive\Documents\New project\backend\database
+[api] request GET /api/health
+[0mGET /api/health [32m200[0m 204.805 ms - 93[0m
+[api] request POST /api/auth/email
+[api] request POST /api/auth/profile
+[webhook] skipped, DISCORD_WEBHOOK_URL not configured Email Sign In
+[0mPOST /api/auth/email [32m200[0m 85.156 ms - 33[0m
+[webhook] skipped, DISCORD_WEBHOOK_URL not configured Onboarding Complete
+[0mPOST /api/auth/profile [32m200[0m 78.886 ms - 33[0m
+[0mOPTIONS /api/auth/email [32m204[0m 0.555 ms - 0[0m
+[api] request POST /api/orders/premium
+[api] request POST /api/orders/free
+[0mPOST /api/orders/free [33m429[0m 201.800 ms - 77[0m
+[0mPOST /api/orders/premium [33m403[0m 214.436 ms - 45[0m

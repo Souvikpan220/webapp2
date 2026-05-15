@@ -1,0 +1,53 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
+      "src": "backend/api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/auth/email",
+      "dest": "backend/api/auth/email.js"
+    },
+    {
+      "src": "/api/auth/profile",
+      "dest": "backend/api/auth/profile.js"
+    },
+    {
+      "src": "/api/orders/free",
+      "dest": "backend/api/orders/free.js"
+    },
+    {
+      "src": "/api/orders/premium",
+      "dest": "backend/api/orders/premium.js"
+    },
+    {
+      "src": "/api/tiktok/profile",
+      "dest": "backend/api/tiktok/profile.js"
+    },
+    {
+      "src": "/api/support",
+      "dest": "backend/api/support/index.js"
+    },
+    {
+      "src": "/api/health",
+      "dest": "backend/api/health.js"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "frontend/index.html"
+    }
+  ]
+}

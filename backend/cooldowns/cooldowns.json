@@ -1,0 +1,12 @@
+{
+  "free": [
+    {
+      "ip": "::ffff:127.0.0.1",
+      "deviceId": "device_prod_test_ABCDE1234567890",
+      "email": "prod-test@example.com",
+      "dayKey": "2026-05-15",
+      "createdAt": "2026-05-15T04:33:25.380Z"
+    }
+  ],
+  "premium": []
+}

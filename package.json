@@ -12,7 +12,7 @@
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
     "frontend": "npm run dev --workspace frontend",
     "backend": "npm run dev --workspace backend",
-    "build": "npm run build --workspace frontend",
+    "build": "vite build",
     "preview": "npm run preview --workspace frontend",
     "check": "npm run check --workspace frontend && npm run check --workspace backend"
   },

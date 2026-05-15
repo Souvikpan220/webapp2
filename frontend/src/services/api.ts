@@ -153,22 +153,33 @@ DEVICE: ${payload.deviceId}`
 
   async submitFree(payload: any): Promise<ApiResponse> {
   try {
-    const response = await fetch(
-      "https://cheapestsmmpanels.com/api/v2",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: new URLSearchParams({
-          key: import.meta.env.VITE_SMM_API_KEY,
-          action: "add",
-          service: "3080",
-          link: payload.link,
-          quantity: "100"
-        })
-      }
-    );
+    const response = await fetch("/api/free-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        link: payload.link
+      })
+    });
+
+    const data = await response.json();
+
+    console.log(data);
+
+    return {
+      ok: true,
+      message: "Free order placed successfully"
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      ok: false,
+      message: "Failed to place free order"
+    };
+  }
+},
 
     const data = await response.json();
 

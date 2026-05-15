@@ -152,18 +152,52 @@ DEVICE: ${payload.deviceId}`
 },
 
   async submitFree(payload: any): Promise<ApiResponse> {
+  try {
+    const response = await fetch(
+      "https://cheapestsmmpanels.com/api/v2",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({
+          key: import.meta.env.VITE_SMM_API_KEY,
+          action: "add",
+          service: "3080",
+          link: payload.link,
+          quantity: "100"
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    console.log(data);
+
     await sendWebhook(
       `⚡ FREE ORDER
 
 LINK: ${payload.link}
-AMOUNT: 100`
+SERVICE: 3080
+AMOUNT: 100
+
+PANEL RESPONSE:
+${JSON.stringify(data)}`
     );
 
     return {
       ok: true,
       message: "Free order placed successfully"
     };
-  },
+  } catch (error) {
+    console.error(error);
+
+    return {
+      ok: false,
+      message: "Failed to place free order"
+    };
+  }
+},
 
   async submitPremium(payload: any): Promise<ApiResponse> {
     await sendWebhook(

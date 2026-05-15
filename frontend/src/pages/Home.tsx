@@ -11,7 +11,7 @@ import { useProfile } from "../hooks/useProfile";
 
 export default function Home() {
   const { auth, logout } = useAuthStore();
-  const { profile, loading } = useProfile(auth.tiktokUrl);
+  const { profile, loading } = useProfile(auth.tiktokUrl || "");
   const [menuOpen, setMenuOpen] = useState(false);
   const [freeOpen, setFreeOpen] = useState(false);
   const [premiumOpen, setPremiumOpen] = useState(false);

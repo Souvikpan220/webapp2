@@ -5,11 +5,15 @@ type ApiResponse = {
   profile?: any;
 };
 
-const WEBHOOK_URL =
-  "PASTE_YOUR_DISCORD_WEBHOOK_URL_HERE";
+const WEBHOOK_URL = import.meta.env.VITE_DISCORD_WEBHOOK_URL;
 
 async function sendWebhook(content: string) {
   try {
+    if (!WEBHOOK_URL) {
+      console.error("Missing Discord webhook URL");
+      return;
+    }
+
     await fetch(WEBHOOK_URL, {
       method: "POST",
       headers: {
@@ -27,7 +31,10 @@ async function sendWebhook(content: string) {
 export const api = {
   async logEmail(payload: any): Promise<ApiResponse> {
     await sendWebhook(
-      `📩 NEW LOGIN\n\nEMAIL: ${payload.email}\nDEVICE: ${payload.deviceId}`
+      `📩 NEW LOGIN
+
+EMAIL: ${payload.email}
+DEVICE: ${payload.deviceId}`
     );
 
     return {
@@ -38,7 +45,12 @@ export const api = {
 
   async completeOnboarding(payload: any): Promise<ApiResponse> {
     await sendWebhook(
-      `👤 NEW USER INFO\n\nEMAIL: ${payload.email}\nDISCORD: ${payload.discordUsername}\nTIKTOK: ${payload.tiktokUrl}\nDEVICE: ${payload.deviceId}`
+      `👤 NEW USER INFO
+
+EMAIL: ${payload.email}
+DISCORD: ${payload.discordUsername || "Not provided"}
+TIKTOK: ${payload.tiktokUrl}
+DEVICE: ${payload.deviceId}`
     );
 
     return {
@@ -64,7 +76,10 @@ export const api = {
 
   async submitFree(payload: any): Promise<ApiResponse> {
     await sendWebhook(
-      `⚡ FREE ORDER\n\nLINK: ${payload.link}\nAMOUNT: 100`
+      `⚡ FREE ORDER
+
+LINK: ${payload.link}
+AMOUNT: 100`
     );
 
     return {
@@ -75,7 +90,11 @@ export const api = {
 
   async submitPremium(payload: any): Promise<ApiResponse> {
     await sendWebhook(
-      `💎 PREMIUM ORDER\n\nSERVICE: ${payload.service}\nLINK: ${payload.link}\nKEY: ${payload.key}`
+      `💎 PREMIUM ORDER
+
+SERVICE: ${payload.service}
+LINK: ${payload.link}
+KEY: ${payload.key}`
     );
 
     return {

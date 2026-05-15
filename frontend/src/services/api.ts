@@ -61,19 +61,67 @@ DEVICE: ${payload.deviceId}`
   },
 
   async getProfile(tiktokUrl: string): Promise<ApiResponse> {
+  try {
+    const username = tiktokUrl
+      .split("@")[1]
+      ?.split("/")[0]
+      ?.trim();
+
+    if (!username) {
+      return {
+        ok: false,
+        message: "Invalid TikTok URL"
+      };
+    }
+
+    const response = await fetch(
+      `https://${import.meta.env.VITE_RAPIDAPI_HOST}/user/info?unique_id=${username}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-key": import.meta.env.VITE_RAPIDAPI_KEY,
+          "x-rapidapi-host": import.meta.env.VITE_RAPIDAPI_HOST
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    console.log(data);
+
+    const user = data?.data?.user;
+    const stats = data?.data?.stats;
+
+    if (!user) {
+      return {
+        ok: false,
+        message: "User not found"
+      };
+    }
+
     return {
       ok: true,
       profile: {
-        username: "kaddu",
-        followers: 120000,
-        following: 120,
-        likes: 450000,
-        videos: 32,
-        verified: true,
-        avatar: "https://i.pravatar.cc/300"
+        username: user.unique_id || username,
+        followers: stats?.follower_count || 0,
+        following: stats?.following_count || 0,
+        likes: stats?.heart_count || 0,
+        videos: stats?.video_count || 0,
+        verified: user?.is_verified || false,
+        avatar:
+          user?.avatar ||
+          "https://i.pravatar.cc/300"
       }
     };
-  },
+  } catch (error) {
+    console.error(error);
+
+    return {
+      ok: false,
+      message: "Failed to fetch TikTok profile"
+    };
+  }
+}
 
   async submitFree(payload: any): Promise<ApiResponse> {
     await sendWebhook(

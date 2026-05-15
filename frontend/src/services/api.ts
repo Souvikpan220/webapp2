@@ -89,8 +89,8 @@ DEVICE: ${payload.deviceId}`
 
     console.log(data);
 
-    const user = data?.data?.user;
-    const stats = data?.data?.stats;
+    const user = data?.data?.user || data?.user;
+    const stats = data?.data?.stats || data?.stats;
 
     if (!user) {
       return {
@@ -102,16 +102,44 @@ DEVICE: ${payload.deviceId}`
     return {
       ok: true,
       profile: {
-        username: user.unique_id || username,
-        followers: stats?.follower_count || 0,
-        following: stats?.following_count || 0,
-        likes: stats?.heart_count || 0,
-        videos: stats?.video_count || 0,
-        verified: user?.is_verified || false,
-        avatar:
-          user?.avatar ||
-          "https://i.pravatar.cc/300"
-      }
+  username:
+    user?.unique_id ||
+    user?.uniqueId ||
+    username,
+
+  followers:
+    stats?.follower_count ||
+    stats?.followerCount ||
+    0,
+
+  following:
+    stats?.following_count ||
+    stats?.followingCount ||
+    0,
+
+  likes:
+    stats?.heart_count ||
+    stats?.heartCount ||
+    0,
+
+  videos:
+    stats?.video_count ||
+    stats?.videoCount ||
+    0,
+
+  verified:
+    user?.is_verified ||
+    user?.verified ||
+    false,
+
+  avatar:
+    user?.avatar_hd ||
+    user?.avatarLarger ||
+    user?.avatarMedium ||
+    user?.avatarThumb ||
+    user?.avatar ||
+    "https://i.pravatar.cc/300"
+}
     };
   } catch (error) {
     console.error(error);

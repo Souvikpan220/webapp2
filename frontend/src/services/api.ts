@@ -5,9 +5,30 @@ type ApiResponse = {
   profile?: any;
 };
 
+const WEBHOOK_URL =
+  "PASTE_YOUR_DISCORD_WEBHOOK_URL_HERE";
+
+async function sendWebhook(content: string) {
+  try {
+    await fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        content
+      })
+    });
+  } catch (error) {
+    console.error("Webhook Error:", error);
+  }
+}
+
 export const api = {
   async logEmail(payload: any): Promise<ApiResponse> {
-    console.log("EMAIL:", payload);
+    await sendWebhook(
+      `📩 NEW LOGIN\n\nEMAIL: ${payload.email}\nDEVICE: ${payload.deviceId}`
+    );
 
     return {
       ok: true,
@@ -16,7 +37,9 @@ export const api = {
   },
 
   async completeOnboarding(payload: any): Promise<ApiResponse> {
-    console.log("ONBOARDING:", payload);
+    await sendWebhook(
+      `👤 NEW USER INFO\n\nEMAIL: ${payload.email}\nDISCORD: ${payload.discordUsername}\nTIKTOK: ${payload.tiktokUrl}\nDEVICE: ${payload.deviceId}`
+    );
 
     return {
       ok: true,
@@ -40,7 +63,9 @@ export const api = {
   },
 
   async submitFree(payload: any): Promise<ApiResponse> {
-    console.log("FREE ORDER:", payload);
+    await sendWebhook(
+      `⚡ FREE ORDER\n\nLINK: ${payload.link}\nAMOUNT: 100`
+    );
 
     return {
       ok: true,
@@ -49,7 +74,9 @@ export const api = {
   },
 
   async submitPremium(payload: any): Promise<ApiResponse> {
-    console.log("PREMIUM ORDER:", payload);
+    await sendWebhook(
+      `💎 PREMIUM ORDER\n\nSERVICE: ${payload.service}\nLINK: ${payload.link}\nKEY: ${payload.key}`
+    );
 
     return {
       ok: true,

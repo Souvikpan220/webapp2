@@ -5,46 +5,23 @@ type ApiResponse = {
   profile?: any;
 };
 
-const API_BASE = "/api";
-
-async function request(
-  url: string,
-  options: RequestInit = {}
-): Promise<ApiResponse> {
-  try {
-    const response = await fetch(`${API_BASE}${url}`, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      ...options
-    });
-
-    const data = await response.json();
-
-    return data as ApiResponse;
-  } catch (error) {
-    console.error(error);
-
-    return {
-      ok: false,
-      message: "Network error"
-    };
-  }
-}
-
 export const api = {
   async logEmail(payload: any): Promise<ApiResponse> {
-    return await request("/auth/email", {
-      method: "POST",
-      body: JSON.stringify(payload)
-    });
+    console.log("EMAIL:", payload);
+
+    return {
+      ok: true,
+      message: "Success"
+    };
   },
 
   async completeOnboarding(payload: any): Promise<ApiResponse> {
-    return await request("/auth/profile", {
-      method: "POST",
-      body: JSON.stringify(payload)
-    });
+    console.log("ONBOARDING:", payload);
+
+    return {
+      ok: true,
+      message: "Success"
+    };
   },
 
   async getProfile(tiktokUrl: string): Promise<ApiResponse> {
@@ -63,6 +40,8 @@ export const api = {
   },
 
   async submitFree(payload: any): Promise<ApiResponse> {
+    console.log("FREE ORDER:", payload);
+
     return {
       ok: true,
       message: "Free order placed successfully"
@@ -70,6 +49,8 @@ export const api = {
   },
 
   async submitPremium(payload: any): Promise<ApiResponse> {
+    console.log("PREMIUM ORDER:", payload);
+
     return {
       ok: true,
       message: "Premium order placed successfully"
